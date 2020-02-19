@@ -194,6 +194,10 @@ func percentile(input stats.Float64Data, percent float64) (res float64) {
 }
 
 func (p *Plugin) Export(key string, params []string, ctx plugin.ContextProvider) (result interface{}, err error) {
+	if len(params) != 1 {
+		return nil, errors.New("Wrong parameters.")
+	}
+
 	url, err := parseURL(params[0])
 	if err != nil {
 		return nil, err
